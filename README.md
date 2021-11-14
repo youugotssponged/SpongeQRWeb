@@ -2,7 +2,7 @@
 SpongeQR now Blazor(fied) with .NET 6
 
 <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">
-	<img title="Blazor" alt="Alt text" src="/Images/blazor.png">
+	<img title="Blazor" alt="Alt text" src="/Images/blazor.svg">
 </a>
 
 <a href="https://youugotssponged.dev">
