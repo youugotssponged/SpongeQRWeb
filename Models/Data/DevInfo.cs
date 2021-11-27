@@ -1,4 +1,4 @@
-﻿namespace SpongeQR.Models.Data;
+﻿namespace SpongeQRWeb.Models.Data;
 public class DevInfo
 {
     public string Version { get; set; }
