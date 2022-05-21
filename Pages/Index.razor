@@ -1,9 +1,91 @@
 ﻿@page "/"
+@using SpongeQRWeb.Models.Data
+@using SpongeQRWeb.Models.Types
+@using SpongeQRWeb.Components
 
-<PageTitle>Index</PageTitle>
+<div>
+    <Jumbotron Background="Background.Light" Margin="Margin.Is4.FromBottom">
+        <JumbotronTitle Size="JumbotronTitleSize.Is3">
+            Welcome to SpongeQR Web
+            <img src="images/SpongeQR.png" alt="Sponge Q R Logo" width="5%" height="5%" />
+            <img src="images/blazor.svg" alt="Blazor Logo" width="5%" height="5%" />
+            <Button Color="Color.Primary" Clicked="@ShowModal" Size="Size.Medium">About</Button>
+            <Modal @ref="modalRef">
+                <ModalContent Centered TextOverflow="TextOverflow.Wrap" Size="ModalSize.Large">
+                    <ModalHeader>
+                        <ModalTitle>Thank you for using Sponge QR!</ModalTitle>
+                        <CloseButton />
+                    </ModalHeader>
+                    <ModalBody TextOverflow="TextOverflow.Wrap">
+                        <p style="font-size: 0.4em">
+                            Developed By J Mac (@@youugotssponged)
+                            <br />
+                            Current Version: (1.0.12)
+                            <br />
+                            Contact: jmacdev13@gmail.com
+                            <br />
+                            <a href="https://youugotssponged.dev/">https://youugotssponged.dev/</a>
+                        </p>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button Color="Color.Primary" Clicked="@HideModal">Close</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+        </JumbotronTitle>
+        <JumbotronSubtitle>
+            A simple, "no brainer" QR Code Generation Tool. Completely free! Steal it and make it your own! now Blazor(fied) with .NET 6.
+        </JumbotronSubtitle>
+        <Divider></Divider>
+    </Jumbotron>
+    <Layout>
+        <LayoutContent>
+            @*TODO: Need to make this a 2 col grid 1. for the *@
+            <Tabs SelectedTab="@selectedTab" SelectedTabChanged="@OnSelectedTabChanged" Pills="true">
+                <Items>
+                    @foreach (var QRTypeName in Enum.GetNames(typeof(QRTypes)))
+                    {
+                        <Tab Name=@(QRTypeName.ToLower())>@QRTypeName</Tab>
+                    }
+                </Items>
+                <Content>
+                    @foreach (var QRTypeName in Enum.GetNames(typeof(QRTypes)))
+                    {
+                        <TabPanel Name=@(QRTypeName.ToLower()) />
+                    }
+                    <PayloadRouter SelectedQRType="@SelectedQRType"/>
+                </Content>
+            </Tabs>
 
-<h1>Hello, world!</h1>
+            @*TODO: 2nd col - QR Output & Save / Clear Dialog Button*@
 
-Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+
+        </LayoutContent>
+        <LayoutFooter>
+            Download it here: Sponge QR Download [NOTE: Please ensure your Windows 10 is updated to latest in order to install]
+        </LayoutFooter>
+    </Layout>
+</div>
+
+@code {
+    private string selectedTab = QRTypes.Message.ToString().ToLower();
+    private Modal modalRef;
+    private QRTypes SelectedQRType = QRTypes.Message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    private Task OnSelectedTabChanged(string name)
+    {
+        selectedTab = name;
+        SelectedQRType = Enum.Parse<QRTypes>(char.ToUpper(selectedTab[0]) + selectedTab.Substring(1));
+        InvokeAsync(() => StateHasChanged());
+        return Task.CompletedTask;
+    }
+
+    private Task ShowModal() => modalRef.Show();
+    private Task HideModal() => modalRef.Hide();
+}

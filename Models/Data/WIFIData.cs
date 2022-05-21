@@ -3,7 +3,7 @@
 namespace SpongeQRWeb.Models.Data;
 public class WIFIData
 {
-    public string SSID { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
+    public string SSID { get; set; }
+    public string Password { get; set; }
     public WIFIAuthTypes WifiAuthType { get; set; } = WIFIAuthTypes.None;
 }

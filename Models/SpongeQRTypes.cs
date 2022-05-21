@@ -3,10 +3,10 @@ public enum QRTypes : int
 {
     Message,
     Email,
-    PhoneNumber,
+    Phone,
     URL,
     WIFI,
-    CalendarEvent
+    Calendar
 }
 
 public enum WIFIAuthTypes : int

@@ -1,5 +1,5 @@
 ﻿namespace SpongeQRWeb.Models.Data;
 public class URLData
 {
-    public string URL { get; set; } = "https://youugotssponged.dev/";
+    public string URL { get; set; }
 }

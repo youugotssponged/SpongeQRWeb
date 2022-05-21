@@ -1,14 +1,11 @@
-﻿using QRCoder;
-using SpongeQRWeb.Models.Types;
+﻿using SpongeQRWeb.Models.Types;
 
 namespace SpongeQRWeb.Core;
 public class GenerateQRLogic
 {
-    private QRCodeGenerator qrGenerator;
 
     public GenerateQRLogic()
     {
-        qrGenerator = new QRCodeGenerator();
     }
 
     public void GenerateMessageQR(string Message)
@@ -48,11 +45,8 @@ public class GenerateQRLogic
 
     }
 
-    private QRCode GenerateQRData(string payload)
+    public string GenerateQRData(string payload)
     {
-        QRCodeData qrCodeData = qrGenerator.CreateQrCode(payload, QRCodeGenerator.ECCLevel.Q);
-        QRCode qrCode = new QRCode(qrCodeData);
-
-        return qrCode;
+        return "";
     }
 }

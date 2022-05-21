@@ -1,0 +1,46 @@
+﻿@using SpongeQRWeb.Core
+@using SpongeQRWeb.Models.Types
+
+@if (loading)
+{
+    switch (SelectedQRType)
+    {
+        case QRTypes.Message:
+            break;
+        case QRTypes.Email:
+            break;
+        case QRTypes.Phone:
+            break;
+        case QRTypes.URL:
+            break;
+        case QRTypes.WIFI:
+            break;
+        case QRTypes.Calendar:
+            break;
+        default:
+            <div>Don't know how you got here! but there is no payload for this</div>
+            break;
+    }
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public QRTypes SelectedQRType { get; set; }
+
+    public GenerateQRLogic Logic { get; set; }
+
+    public bool loading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Logic = new();
+        await base.OnInitializedAsync();
+        loading = true;
+        StateHasChanged();
+    }
+    //[Parameter, EditorRequired]
+    //public EventCallback<string> QRBase64Str{ get; set; }
+
+
+
+}
